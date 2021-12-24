@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>列表排序</title>
+</head>
+
+<body>
+  <div id="root">
+    <input type="text" v-model="keyWords">
+    <button @click="sortType = 2">升序</button>
+    <button @click="sortType = 1">降序</button>
+    <button @click="sortType = 0">原序</button>
+    <ul>
+      <li v-for="item in list" :key="item.id">
+        {{item.id}}-------{{item.name}}-------{{item.age}}
+      </li>
+    </ul>
+
+  </div>
+
+  <script src="./vue.js"></script>
+
+  <script>
+    Vue.config.productionTip = false;//调整配置
+
+    new Vue({
+      el: "#root",
+      data() {
+        return {
+          keyWords: "",
+          sortType: 0,
+          arr: [{
+            id: "001",
+            name: "冬天",
+            age: 20
+          },
+          {
+            id: "002",
+            name: "冬瓜",
+            age: 16
+          },
+          {
+            id: "003",
+            name: "西瓜",
+            age: 30
+          }, {
+            id: "004",
+            name: "西天取经",
+            age: 56
+          }],
+        }
+      },
+      computed: {
+        list() {
+          // return this.arr.filter(item => {
+          //   return item.name.indexOf(this.keyWords) >= 0;
+          // })
+          const arr = this.arr.filter(item => {
+            return item.name.includes(this.keyWords);
+          })
+          if (this.sortType) {
+            //b - a 降序
+            arr.sort((a, b) => {
+              return this.sortType == 1 ? b.age - a.age : a.age - b.age
+            })
+          }
+          return arr;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

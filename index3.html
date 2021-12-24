@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue 中key 的原理</title>
+</head>
+
+<body>
+  <!-- 解释什么时候用 index 不会打乱数据结构时用key
+    打乱用key 会效率低 
+    虚拟DOM 对比文本节点 和标签节点是否相同
+    相同则复用真实DOM  不同则重新生成真实DOM
+    什么时候用id 可能会打乱数据结构时用id -->
+  <div id="root">
+    <ul>
+      <li v-for="item in arr" :key="item.id">
+        {{item.id}}-------{{item.name}}
+        <input type="text">
+      </li>
+    </ul>
+    <button @click.once="add">点击</button>
+  </div>
+
+  <script src="./vue.js"></script>
+
+  <script>
+    Vue.config.productionTip = false;//调整配置
+
+    new Vue({
+      el: "#root",
+      data() {
+        return {
+          arr: [{
+            id: "001",
+            name: "x",
+          },
+          {
+            id: "002",
+            name: "y",
+          },
+          {
+            id: "003",
+            name: "z",
+          }]
+        }
+      },
+      methods: {
+        add() {
+          this.arr.unshift({
+            id: "004",
+            name: "a",
+          })
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue 检测对象改变的原理</title>
+</head>
+
+<body>
+  <div id="root">
+
+  </div>
+
+
+  <script>
+    let data = {
+      name: "zs",
+      age: 20
+    }
+
+    let obs = new Observe(data);
+    // 单层级可以 多层级要使用 递归 
+    function Observe(data) {
+      let arr = Object.keys(data);
+      arr.forEach(k => {
+        Object.defineProperty(this, k, {
+          get() {
+            return data[k]
+          },
+          set(val) {
+            data[k] = val;
+          }
+        })
+      })
+    }
+
+    console.log('obs', obs);
+
+  </script>
+</body>
+
+</html>

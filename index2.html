@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>method对比computed</title>
+</head>
+
+<body>
+  <div id="root">
+    姓<input type="text" v-model="firstName">
+    <br>
+    名<input type="text" v-model="lastName">
+    <br>
+    全称<span>{{ fullName() }}</span>
+
+  </div>
+
+  <script src="./vue.js"></script>
+
+  <script>
+    Vue.config.productionTip = false;//调整配置
+
+
+    const vm = new Vue({
+      el: "#root",
+      data() {
+        return {
+          firstName: "z",
+          lastName: 's'
+        }
+      },
+      methods: {
+        fullName() {
+          console.log('123');
+          
+          return this.firstName + "-" + this.lastName
+        }
+      }
+    })
+
+    console.log('Vue', vm);
+  </script>
+</body>
+
+</html>

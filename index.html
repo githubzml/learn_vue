@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>基础</title>
+</head>
+
+<body>
+
+  <div id="root">
+
+    <div>
+      {{name}}
+    </div>
+
+  </div>
+
+  <script src="./vue.js"></script>
+  <script>
+    Vue.config.productionTip = false;//调整配置
+
+    // 挂载方式1
+
+    const x = new Vue({
+      el: "#root",
+      //对象式 1
+      data: {
+        name: 'zs11',
+        age: 333
+      }
+
+      //函数式  2
+      // data(){
+      //   console.log('this',this);
+
+      //   return{}
+      // }
+    }) //实例 维护数据 省去了 操作DOM赋值
+
+
+    // 负责容器部分
+    // 组件
+
+    // 挂载方式2 $mount
+
+    console.log('x', x);
+
+
+  </script>
+
+  <script>
+    let num = 19;
+    let obj = {
+      name: "m",
+      address: "aaa"
+    }
+
+    //颜色不同 不可枚举  
+    //enumerable 默认值是false 是否可枚举 
+    //writable默认值false 是否可修改 
+    //configurable 默认值false 是否能删除
+
+    //get函数
+    //set函数 
+    Object.defineProperty(obj, 'age', {
+      get() {
+        return num;
+      },
+      //读取obj的age属性时 就是触发get函数的调用 且返回值是age的值
+      set(value) {
+        num = value;
+      }
+    })
+    console.log('obj', obj);
+
+
+    // invoke 映射 property getter
+    // (...) 值是映射过来的
+
+    // Object.defineProperty将一个变量与对象关联起来 获取动态值
+  </script>
+
+
+</body>
+
+</html>

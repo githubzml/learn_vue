@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>set 使用</title>
+</head>
+
+<body>
+  <div id="root">
+    <span>{{obj.age}}</span>
+    <button @click="add">按钮</button>
+  </div>
+
+  <script src="./vue.js"></script>
+
+  <script>
+    const x = new Vue({
+      el: "#root",
+      data() {
+        return {
+          obj: {
+            name: "zs"
+          }
+        }
+      },
+      methods: {
+        add() {
+          this.$set(this.obj, "age", 20);
+          console.log('x', x);
+
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
