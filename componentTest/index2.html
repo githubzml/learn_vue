@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件嵌套</title>
+</head>
+
+<body>
+  <div id="root">
+  </div>
+
+  <div id="root2">
+    <cc></cc>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    Vue.config.productionTip = false;
+
+
+    let cc = Vue.extend({
+      template: ` <div>
+      {{hello}}
+    </div>`,
+      data() {
+        return {
+          hello: "这是一段文字"
+        }
+      }
+    })
+
+    let bb = Vue.extend({
+      template: ` <div>
+      {{age}}
+      <cc></cc>
+    </div>`,
+    components: { cc },
+      data() {
+        return {
+          age: "13"
+        }
+      }
+    })
+    
+
+    //局部组件
+    let aa = Vue.extend({
+      template: `<div>
+      {{name}}
+        <bb></bb>
+    </div>`,
+      components: { bb },
+      data() {
+        return {
+          name: "zz"
+        }
+      }
+    })
+    //全局组件
+    let app = {
+      template: `<aa></aa>`,
+      components: { aa }
+    }
+    new Vue({
+      el: "#root",
+      template: `<app></app>`,
+      components: { app }
+    })
+
+
+
+  </script>
+</body>
+
+</html>

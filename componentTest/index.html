@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root">
+    <aa></aa>
+    <bb></bb>
+    <cc></cc>
+  </div>
+
+  <div id="root2">
+    <cc></cc>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    Vue.config.productionTip = false;
+
+    // Vue.extend 与 对象写法 Vue源文件会有个判断 如果没有extend 会包裹上 如果有 直接拿过来复用
+
+    //局部组件
+    let aa = Vue.extend({
+      template: `<div>
+      {{name}}
+    </div>`,
+      data() {
+        return {
+          name: "zz"
+        }
+      }
+    })
+    let bb = Vue.extend({
+      template: ` <div>
+      {{age}}
+    </div>`,
+      data() {
+        return {
+          age: "13"
+        }
+      }
+    })
+
+    let cc = Vue.extend({
+      template: ` <div>
+      {{hello}}
+    </div>`,
+      data() {
+        return {
+          hello: "这是一段文字"
+        }
+      }
+    })
+    //全局组件
+    Vue.component("cc", cc)
+
+    new Vue({
+      el: "#root",
+      components: { aa, bb }
+    })
+
+    new Vue({
+      el: "#root2",
+    })
+
+
+  </script>
+</body>
+
+</html>
